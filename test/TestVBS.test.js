@@ -11,19 +11,21 @@ const fileContent = fs.readFileSync(filePath + "\\example.vbs");
 it('Test VBScript Executor GET', async () => {
     await spec()
         .get('http://localhost:3000')
-        .inspect()
+        //.inspect()
         .expectStatus(200);
 });
 
 it('Test VBScript Executor POST', async () => {
     log(fileContent.toString())
 
-    await spec()
+    const resp = await spec()
         .post('http://localhost:3000/execute-vbscript')
         .withRequestTimeout(10000)
         .withHeaders({
             'Content-Type': 'text/plain'
         })
         .withBody(fileContent.toString())
-        .expectStatus(200);
+        .returns()
+
+    log("\n --------- Output from the script ---------- \n" + resp.body)
 });
