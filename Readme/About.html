@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example VBScript Endpoint</title>
+</head>
+<body>
+  <h1>Example VBScript Endpoint</h1>
+  <p>This is an example endpoint that allows you to run VBScript code and get the output.</p>
+
+  <h2>Endpoint</h2>
+  <p><code>POST /run-vbscript</code></p>
+
+  <h2>Request Parameters</h2>
+  <ul>
+    <li><code>script</code>: The VBScript code to run. This should be passed in as a plain text body.</li>
+  </ul>
+
+  <h2>Example Request</h2>
+  <pre>
+    <code>
+POST /run-vbscript HTTP/1.1
+Host: example.com
+Content-Type: text/plain
+
+Dim objExcel, objWorkbook
+Set objExcel = CreateObject("Excel.Application")
+Set objWorkbook = objExcel.Workbooks.Open("C:\path\to\file.xlsx")
+
+' do something with the workbook
+objWorkbook.Worksheets("Sheet1").Range("A1").Value = "Hello, World!"
+objWorkbook.Save
+objWorkbook.Close
+objExcel.Quit
+
+Set objWorkbook = Nothing
+Set objExcel = Nothing
+    </code>
+  </pre>
+
+  <h2>Example Response</h2>
+  <pre>
+    <code>
+{
+  "success": true,
+  "output": "Script executed successfully."
+}
+    </code>
+  </pre>
+
+  <h2>Notes</h2>
+  <ul>
+    <li>The <code>Content-Type</code> header should be set to <code>text/plain</code>.</li>
+    <li>The response will be in JSON format, with a <code>success</code> flag indicating whether the script executed successfully, and an <code>output</code> field containing the output of the script.</li>
+    <li>Make sure that your VBScript code does not contain any sensitive information, as it will be transmitted as plain text.</li>
+  </ul>
+</body>
+</html>
