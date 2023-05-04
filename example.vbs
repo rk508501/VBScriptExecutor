@@ -9,7 +9,7 @@ objExcel.Visible = True
 Set objWorkbook = objExcel.Workbooks.Open ("C:\Users\ADMIN\Downloads\AutomationCode\Sample.xlsm")
 
 'Do something with the workbook (optional)
-objWorkbook.Worksheets ("Sheet1").Range ("A1").Value = 420
+objWorkbook.Worksheets ("Sheet1").Range ("A1").Value = 777
 
 Dim value
 value = objWorkbook.Worksheets ("Sheet1").Range ("A1").Value
